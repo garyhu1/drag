@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>拖拽</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box {
+				width: 50px;
+				height: 50px;
+				background: firebrick;
+				position: absolute;
+				top: 0;
+				left: 0;
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+	<script type="text/javascript">
+		var box = document.getElementById("box");
+        var startX = 0;
+        var startY = 0;
+        var flag = false;
+		box.onmousedown = function(e) {
+			var _e = window.event||e;
+			startX = _e.clientX;
+			startY = _e.clientY;
+			flag = true;
+		}
+		document.onmousemove = function(e) {
+			if(flag){
+				var _e = window.event||e;
+			    var x = _e.clientX-startX;
+			    var y = _e.clientY-startY;
+			    startX = _e.clientX;
+			    startY = _e.clientY;
+			    box.style.left = (parseInt(getStyle(box,"left"))+x)+"px";
+			    box.style.top = (parseInt(getStyle(box,"top"))+y)+"px";
+			}
+		}
+		box.onmouseup = function(e) {
+			flag = false;
+		}
+		
+		function getStyle(obj,attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}else{
+				return window.getComputedStyle(obj,null)[attr];
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box {
+				width: 50px;
+				height: 50px;
+				background: red;
+				position:absolute;
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript" src="../js/jquery.min.js" ></script>
+		<script>
+			var x = 0;
+			var y = 0;
+			var move = false;
+			$("#box").mousedown(function(){
+				move = true;
+				x = event.offsetX;
+				y = event.offsetY;
+			})
+			$("#box").mouseup(function(){
+				move = false;
+			})
+			$(document).mousemove(function(){
+				if(!move)//如果bool为false则返回
+				return;
+				var a = event.clientX - x;
+				var b = event.clientY - y;
+				$("#box").css("left",a);
+				$("#box").css("top",b)
+			})
+		</script>
+	</body>
+</html>
